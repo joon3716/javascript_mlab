@@ -5,6 +5,7 @@ obj_NgApp.controller('ctr_keep', function ($scope, $http, $document, $window) {
     var mlabMongoDbHelper;
     var tableHelper;
             
+    $scope.apiKey = "OjXK37W4RcV68GHKqiK-RjRV8x3QMX0x";
     $document.ready(function () {
         mlabMongoDbHelper = new MlabMongoDbHelper($scope.apiKey, $http);
     });
@@ -15,8 +16,8 @@ obj_NgApp.controller('ctr_keep', function ($scope, $http, $document, $window) {
 
     $scope.searchMemo = function() {
         var queryObj = {};
-        queryObj.db = "azure";
-        queryObj.col = "memo";
+        queryObj.db = "hong";
+        queryObj.col = "hong";
         queryObj.sortCriteria = '{"reg_date": -1}';
         queryObj.queryCriteria = '{"title": {"$regex": "' + ($scope.searchKeyword || '') + '"}}';
         mlabMongoDbHelper.getDocument(queryObj, function(data) {
@@ -36,8 +37,8 @@ obj_NgApp.controller('ctr_keep', function ($scope, $http, $document, $window) {
 
     $scope.addMemo = function() {
         var queryObj = {};
-        queryObj.db = "azure";
-        queryObj.col = "memo";
+        queryObj.db = "hong";
+        queryObj.col = "hong";
         queryObj.insertObj = {"title": $scope.selectedTitle, "contents": $scope.selectedContents, "reg_date": {"$date": new Date().toISOString()}};
         mlabMongoDbHelper.addDocument(queryObj, function() {
             $scope.searchMemo();
@@ -47,8 +48,8 @@ obj_NgApp.controller('ctr_keep', function ($scope, $http, $document, $window) {
 
     $scope.updateMemo = function() {
         var queryObj = {};
-        queryObj.db = "azure";
-        queryObj.col = "memo";
+        queryObj.db = "hong";
+        queryObj.col = "hong";
         queryObj._id = $scope.selectedId;
         queryObj.updateObj = {"title": $scope.selectedTitle, "contents": $scope.selectedContents, "reg_date": {"$date": new Date().toISOString()}};
         mlabMongoDbHelper.updateDocument(queryObj, function() {
@@ -59,8 +60,8 @@ obj_NgApp.controller('ctr_keep', function ($scope, $http, $document, $window) {
 
     $scope.deleteMemo = function() {
         var queryObj = {};
-        queryObj.db = "azure";
-        queryObj.col = "memo";
+        queryObj.db = "hong";
+        queryObj.col = "hong";
         queryObj._id = $scope.selectedId;
         mlabMongoDbHelper.deleteDocument(queryObj, function() {
             $scope.searchMemo();
